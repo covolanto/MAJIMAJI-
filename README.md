@@ -41,28 +41,56 @@ A **Water Billing Management System** is a software solution designed to automat
 
 ---
 
-## 🛠️ Technology Stack (Examples)
+## 🛠️ Technology Stack
 
-| Component | Options |
-|-----------|---------|
-| **Backend** | PHP (Laravel), Java, Node.js |
-| **Frontend** | HTML, CSS, Bootstrap, React.js |
+| Component | Technologies Used |
+|-----------|-------------------|
+| **Backend** | PHP |
+| **Frontend** | HTML, CSS, JavaScript |
 | **Database** | MySQL |
-| **Desktop GUI** | Java Swing, AWT, JavaFX |
-| **IoT Integration** | ESP32, flow sensors, OLED displays |
-| **Machine Learning** | Python, TensorFlow (LSTM models for prediction) |
+| **UI Framework** | Bootstrap |
+| **Libraries** | jQuery, Chart.js, Font Awesome |
+| **PDF Generation** | FPDF/TCPDF |
+| **Email Service** | PHPMailer |
+| **Server** | XAMPP/WAMP/LAMP |
 
 ---
 
-## 📁 Database Schema (Example)
+## 📁 Database Schema
 
 Typical tables include:
 
-- **Users** — `uid`, `username`, `email`, `password`, `access_level`
-- **Consumers** — `id`, `uid`, `fname`, `lname`, `phone_number`, `address`, `dob`
-- **Bills** — `bid`, `id`, `reading`, `period`, `status`, `bill_timestamp`
-- **Price/Charges** — `price_id`, `price_value`
-- **Payments** — transaction records and payment status
+- **Users** — `user_id`, `username`, `email`, `password_hash`, `role`, `full_name`, `phone`, `address`
+- **Customers** — `customer_id`, `user_id`, `meter_number`, `connection_type`, `connection_date`, `service_address`
+- **Meter Readings** — `reading_id`, `customer_id`, `reading_date`, `current_reading`, `previous_reading`, `consumption`
+- **Rate Structure** — `rate_id`, `connection_type`, `tier_min`, `tier_max`, `rate_per_unit`, `fixed_charge`
+- **Bills** — `bill_id`, `customer_id`, `bill_number`, `bill_date`, `due_date`, `total_amount`, `status`
+- **Payments** — `payment_id`, `bill_id`, `customer_id`, `amount_paid`, `payment_method`, `payment_status`
+- **Notifications** — `notification_id`, `user_id`, `title`, `message`, `is_read`
+- **Activity Logs** — `log_id`, `user_id`, `action`, `table_name`, `record_id`, `ip_address`
+
+---
+
+## 🔧 Installation Guide
+
+### Prerequisites
+- XAMPP/WAMP/LAMP installed
+- PHP 7.4+
+- MySQL 5.7+
+- Web browser
+
+### Steps
+1. Clone or download the project to your web server directory
+2. Create a database named `water_billing_system`
+3. Import the SQL file from `database/water_billing.sql`
+4. Configure database connection in `includes/config.php`
+5. Set proper file permissions for uploads folder
+6. Access the application via browser
+
+### Default Login
+- **Admin:** username: `admin`, password: `admin123`
+- **Employee:** username: `employee`, password: `emp123`
+- **Customer:** username: `customer`, password: `cust123`
 
 ---
 
@@ -76,15 +104,26 @@ Thorough testing ensures system reliability:
 
 ---
 
+## 🔒 Security Features
+
+- Password hashing using PHP `password_hash()`
+- Prepared statements to prevent SQL injection
+- Session management with timeout
+- XSS protection through input sanitization
+- CSRF token validation
+- Role-based access control (RBAC)
+- Activity logging for audit trail
+
+---
+
 ## 📚 References & Real-World Examples
 
 | Project | Tech Stack | Key Feature |
 |---------|------------|-------------|
 | **Public Utility Management System** | PHP, MySQL | Multi-utility billing, role-based access, reporting |
-| **Smart Water Monitoring & Billing System** | Laravel, MySQL, Bootstrap | IoT-enabled, prepaid billing |
-| **Water Billing System (Java GUI)** | Java, Swing | Invoicing, online payment link, usage tracking |
-| **Smart Water Management System** | React, Node.js, TensorFlow, Blockchain | LSTM prediction, secure data storage |
-| **DIGIT Water & Sewerage Module** | — | Configurable workflows, SMS alerts, bulk demand generation |
+| **Smart Water Monitoring & Billing System** | PHP, MySQL, Bootstrap | IoT-enabled, prepaid billing |
+| **Water Billing System** | PHP, HTML, CSS, JS | Invoicing, online payment, usage tracking |
+| **Smart Water Management System** | PHP, MySQL, JavaScript | LSTM prediction, secure data storage |
 
 ---
 
@@ -94,6 +133,5 @@ Thorough testing ensures system reliability:
 - Rewards/penalties for sustainable water usage
 - Crowdsourced water issue reporting
 - Mobile app interfaces for customers
-
----
-
+- SMS notification integration
+- Payment gateway integration
