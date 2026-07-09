@@ -1,4 +1,4 @@
-# MAJIMAJI-
+# MAJIMAJI
 # Water Billing Management System — README
 
 This README covers the essential sections for a water billing management system, with examples and references drawn from real-world projects.
